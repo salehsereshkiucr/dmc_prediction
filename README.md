@@ -3,7 +3,7 @@
 
 ## Overview
 
-L-Map is a tool designed for the prediction and analysis of differentially methylated cytosines (DMCs) using DNABERT, a Large Language Model. It has several modules: training, testing, motif finding, and DMC detection through dedicated modules.
+L-Map is a tool designed for the prediction and analysis of differentially methylated cytosines (DMCs) using DNABERT, a Large Language Model. It has several modules: Prediction, motif finding, Training, and DMC detection through dedicated modules.
 
 ## Prerequisites
 
@@ -16,6 +16,56 @@ Ensure you have the following libraries installed:
 - pytorch (2.0.1+cu117)
 
 ## Modules
+
+### Prediction
+
+The prediction module allows for the utilization of a trained model to predict a list of cytosines as DMCs or not. Notice for each of seven knock-out datasets explained in the paper "Sequence level TETs and DNMT3s domain prediction via a Language Model" We have one pre-trained model uploaded [here](https://drive.google.com/drive/folders/1jCDAdqcvpeI9nNrWiJAYQh1jgauOaO2E?usp=sharing). To utilize these pre-trained models you need to download them and pass the corresponding folder address in this module command. model_address attribute should contain a []_torchnn.pth file and []_bert folder containing a pytorch_model.bin and a config.json file.
+
+The genome assembly and a file containing the cytosine positions should be provided in the attributes. Sample datasets are available at ./data/. Notice the files provided in the ./models/pretrained_models/TET/ are not actual files that a model can be loaded from (due to the file size limitation of git) __ You need to download a model from [here](https://drive.google.com/drive/folders/1jCDAdqcvpeI9nNrWiJAYQh1jgauOaO2E?usp=sharing) or train your own model before using this module.__ 
+
+**Command:**
+```
+python test.py -mc <mc_address> -ga <genome_assembly> -mn <model_address>
+```
+
+**Options:**
+- `-mc`, `--mc_address`: File with cytosines to classify. (Required)
+- `-ga`, `--genome_assembly`: Genome assembly file in FASTA. (Required)
+- `-mn`, `--model_name`: Location of the trained model. (Default: './models/trained_clf')
+- `-ws`, `--window_size`: Window size for sequence processing. (Default: 512)
+- `-kmer`: K-mer size for sequence representation. (Default: 6)
+
+
+**Example Command:**
+
+```
+python test.py -mc ./data/sample_dmc_test.csv -ga ./data/sample_asembly.fa -mn ./models/pretrained_models/TET/ -ws 512 -kmer 6
+```
+
+### Motif Finding 
+
+This module is aimed at identifying motifs corresponding to DMCs using a trained model. Sample datasets are available at ./data/
+
+**Command:**
+```
+python motif_finding.py -dmc_seq <dmc_seq_address> -ndmc_seq <ndmc_seq_address> [options]
+```
+
+**Options:**
+- `-dmc_seq`, `--dmc_seq`: Context sequences of DMCs in FASTA. (Required)
+- `-ndmc_seq`, `--ndmc_seq`: Context sequences of nDMCs in FASTA. (Required)
+- `-mn`, `--model_name`: Location of the trained model. (Default: './models/trained_clf')
+- `-ws`, `--window_size`: Window size for sequence processing. (Default: 512)
+- `-kmer`: K-mer size for sequence representation. (Default: 6)
+
+**Example Command:**
+
+```
+python motif_finding.py -dmc_seq ./data/motif_sample_pos.fa -ndmc_seq ./data/motif_sample_neg.fa -mn ./models/trained_clf -ws 512 -kmer 6
+```
+
+
+
 
 ### Training
 
@@ -46,50 +96,6 @@ python train.py -dmc ./data/sample_dmc_train.csv -ndmc ./data/sample_notdmc_trai
 This command will train a model using the specified DMC and nDMC files, with the provided genome assembly, and save it to the specified location.
 
 
-### Testing
-
-The testing module allows for the utilization of a trained model to predict a list of cytosines as DMCs or not. Sample datasets are available at ./data/
-
-**Command:**
-```
-python test.py -mc <mc_address> -ga <genome_assembly> [options]
-```
-
-**Options:**
-- `-mc`, `--mc_address`: File with cytosines to classify. (Required)
-- `-ga`, `--genome_assembly`: Genome assembly file in FASTA. (Required)
-- `-mn`, `--model_name`: Location of the trained model. (Default: './models/trained_clf')
-- `-ws`, `--window_size`: Window size for sequence processing. (Default: 512)
-- `-kmer`: K-mer size for sequence representation. (Default: 6)
-
-
-**Example Command:**
-
-```
-python test.py -mc ./data/sample_dmc_test.csv -ga ./data/sample_asembly.fa -mn ./models/trained_clf -ws 512 -kmer 6
-```
-
-### Motif Finding 
-
-This module is aimed at identifying motifs corresponding to DMCs using a trained model. Sample datasets are available at ./data/
-
-**Command:**
-```
-python motif_finding.py -dmc_seq <dmc_seq_address> -ndmc_seq <ndmc_seq_address> [options]
-```
-
-**Options:**
-- `-dmc_seq`, `--dmc_seq`: Context sequences of DMCs in FASTA. (Required)
-- `-ndmc_seq`, `--ndmc_seq`: Context sequences of nDMCs in FASTA. (Required)
-- `-mn`, `--model_name`: Location of the trained model. (Default: './models/trained_clf')
-- `-ws`, `--window_size`: Window size for sequence processing. (Default: 512)
-- `-kmer`: K-mer size for sequence representation. (Default: 6)
-
-**Example Command:**
-
-```
-python motif_finding.py -dmc_seq ./data/motif_sample_pos.fa -ndmc_seq ./data/motif_sample_neg.fa -mn ./models/trained_clf -ws 512 -kmer 6
-```
 
 ### DMC Detection
 
