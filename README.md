@@ -23,7 +23,9 @@ The prediction module enables the use of a trained model to classify a list of c
 
 To use these pre-trained models, download them and specify the downloaded folder's path in the module command's `model_name` attribute. This attribute should point to a directory containing the []_torchnn.pth file and a []_bert folder, which includes both a pytorch_model.bin and a config.json file.
 
-The genome assembly and a file containing the cytosine positions should be provided in the attributes. Sample datasets are available at ./data/. Notice the files provided in the ./models/pretrained_models/TET/ are not actual files that a model can be loaded from (due to the file size limitation of git) **You need to download a model from [here](https://drive.google.com/drive/folders/1jCDAdqcvpeI9nNrWiJAYQh1jgauOaO2E?usp=sharing) or train your own model before using this module.**
+Additionally, you must provide the genome assembly and a file listing the cytosine positions in the attributes. Sample datasets can be found in ./data/.
+
+**Important:** The files located in ./models/pretrained_models/TET/ are placeholders due to GitHub's file size limitations and cannot be used directly to load a model. Before using this module, ensure you have downloaded a model from [here]((https://drive.google.com/drive/folders/1jCDAdqcvpeI9nNrWiJAYQh1jgauOaO2E?usp=sharing)) or trained your own model.
 
 **Command:**
 ```
@@ -33,7 +35,7 @@ python test.py -mc <mc_address> -ga <genome_assembly> -mn <model_address>
 **Options:**
 - `-mc`, `--mc_address`: File with cytosines to classify. (Required)
 - `-ga`, `--genome_assembly`: Genome assembly file in FASTA. (Required)
-- `-mn`, `--model_name`: Location of the trained model. (Default: './models/trained_clf')
+- `-mn`, `--model_name`: Location of the trained model. (Required)
 - `-ws`, `--window_size`: Window size for sequence processing. (Default: 512)
 - `-kmer`: K-mer size for sequence representation. (Default: 6)
 
