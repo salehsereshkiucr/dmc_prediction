@@ -19,7 +19,9 @@ Ensure you have the following libraries installed:
 
 ### Prediction
 
-The prediction module allows for the utilization of a trained model to predict a list of cytosines as DMCs or not. Notice for each of seven knock-out datasets explained in the paper "Sequence level TETs and DNMT3s domain prediction via a Language Model" We have one pre-trained model uploaded [here](https://drive.google.com/drive/folders/1jCDAdqcvpeI9nNrWiJAYQh1jgauOaO2E?usp=sharing). To utilize these pre-trained models you need to download them and pass the corresponding folder address in this module command. model_address attribute should contain a []_torchnn.pth file and []_bert folder containing a pytorch_model.bin and a config.json file.
+The prediction module enables the use of a trained model to classify a list of cytosines as DMCs (Differentially Methylated Cytosines) or not. For each of the seven knock-out datasets described in the paper "Sequence level TETs and DNMT3s domain prediction via a Language Model," we provide one pre-trained model. These models can be accessed and downloaded from [this Google Drive Link](https://drive.google.com/drive/folders/1jCDAdqcvpeI9nNrWiJAYQh1jgauOaO2E?usp=sharing)
+
+To use these pre-trained models, download them and specify the downloaded folder's path in the module command's `model_name` attribute. This attribute should point to a directory containing the []_torchnn.pth file and a []_bert folder, which includes both a pytorch_model.bin and a config.json file.
 
 The genome assembly and a file containing the cytosine positions should be provided in the attributes. Sample datasets are available at ./data/. Notice the files provided in the ./models/pretrained_models/TET/ are not actual files that a model can be loaded from (due to the file size limitation of git) **You need to download a model from [here](https://drive.google.com/drive/folders/1jCDAdqcvpeI9nNrWiJAYQh1jgauOaO2E?usp=sharing) or train your own model before using this module.**
 
