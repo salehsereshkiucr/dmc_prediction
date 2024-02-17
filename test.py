@@ -15,7 +15,7 @@ import utils.data_manager as dmngr
 parser = argparse.ArgumentParser()
 parser.add_argument('-mc', '--mc_address', help='address of a tab separated file with the positions of cytosines', required=True)
 parser.add_argument('-ga', '--genome_assembly', help='address of a tab separated file with the positions of not differentially methylated cytosines', required=True)
-parser.add_argument('-mn', '--model_name', help='the address to load model', required=False, default='./models/trained_clf')
+parser.add_argument('-mn', '--model_name', help='the address to load model', required=True)
 parser.add_argument('-ws', '--window_size', help='window_size', required=False, default=512)
 parser.add_argument('-kmer', '--kmer', help='kmer', required=False, default=6)
 
