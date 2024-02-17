@@ -13,22 +13,22 @@ This project requires Python 3.6 or later. Before installing the required depend
 
 It's recommended to create a virtual environment for this project to avoid conflicts with other packages. Use the following commands to create and activate a virtual environment:
 
-# Create a virtual environment (replace 'myenv' with your preferred environment name)
+Create a virtual environment (replace 'myenv' with your preferred environment name)
 ```
 python -m venv myenv
 ```
 
-# Activate the virtual environment
-# On Windows
+#Activate the virtual environment
+On Windows
 ```
 myenv\Scripts\activate
 ```
-# On macOS and Linux
+On macOS and Linux
 ```
 source myenv/bin/activate
 ```
 
-# Installing Dependencies
+Installing Dependencies
 With the virtual environment activated, install the project dependencies by running:
 ```
 pip install -r requirements.txt
