@@ -33,11 +33,11 @@ window_size = int(args.window_size)
 
 #python motif_finding.py -dmc_seq ./data/motif_sample_pos.fa -ndmc_seq ./data/motif_sample_neg.fa
 
-dmc_seq = './data/motif_sample_pos.fa'
-ndmc_seq = './data/motif_sample_neg.fa'
-model_address = './models/trained_clf'
-kmer = 6
-window_size = 512
+# dmc_seq = './data/motif_sample_pos.fa'
+# ndmc_seq = './data/motif_sample_neg.fa'
+# model_address = './models/trained_clf'
+# kmer = 6
+# window_size = 512
 
 pos_seqs = list(data_reader.readfasta(dmc_seq).values())
 neg_seqs = list(data_reader.readfasta(ndmc_seq).values())
