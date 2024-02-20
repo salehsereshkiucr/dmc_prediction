@@ -5,15 +5,34 @@
 
 L-Map is a tool designed for the prediction and analysis of differentially methylated cytosines (DMCs) using DNABERT, a Large Language Model. It has several modules: Prediction, motif finding, Training, and DMC detection through dedicated modules.
 
-## Prerequisites
+## Installation
 
-Ensure you have the following libraries installed:
-- pandas (2.0.3)
-- numpy (1.24.2)
-- sklearn (1.3.0)
-- transformers (4.18.0)
-- tensorflow (2.11.0)
-- pytorch (2.0.1+cu117)
+This project requires Python 3.6 or later. Before installing the required dependencies, ensure you have Python and pip installed on your system.
+
+### Setting Up a Virtual Environment (Recommended)
+
+It's recommended to create a virtual environment for this project to avoid conflicts with other packages. Use the following commands to create and activate a virtual environment:
+
+Create a virtual environment (replace 'myenv' with your preferred environment name)
+```
+python -m venv myenv
+```
+
+#Activate the virtual environment
+On Windows
+```
+myenv\Scripts\activate
+```
+On macOS and Linux
+```
+source myenv/bin/activate
+```
+
+Installing Dependencies
+With the virtual environment activated, install the project dependencies by running:
+```
+pip install -r requirements.txt
+```
 
 ## Modules
 
