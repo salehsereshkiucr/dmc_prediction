@@ -5,6 +5,7 @@ sys.path.append(project_root)
 import torch
 import torch.nn as nn
 from transformers import BertModel
+import glob
 
 class DNASequenceClassifier(nn.Module):
     def __init__(self, bert_model, fc_ad, num_classes, **kwargs):
@@ -38,5 +39,19 @@ class DNASequenceClassifier(nn.Module):
         self.bert.save_pretrained(file_name+'_bert')
         torch.save(self.fc.state_dict(), file_name+'_torchnn.pth')
 
+
+def find_torch_and_bert_paths(folder_path):
+    torch_pattern = os.path.join(folder_path, '*_torchnn.pth')
+    bert_pattern = os.path.join(folder_path, '*_bert')
+    torch_files = glob.glob(torch_pattern)
+    bert_folders = [d for d in glob.glob(bert_pattern) if os.path.isdir(d)]
+    if len(torch_files) != 1:
+        raise ValueError(f"Expected exactly one torch model file, but found {len(torch_files)}.")
+    if len(bert_folders) != 1:
+        raise ValueError(f"Expected exactly one bert folder, but found {len(bert_folders)}.")
+    return torch_files[0], bert_folders[0]
+
+
 def load_clf_model(file_name):
-    return DNASequenceClassifier(BertModel.from_pretrained(file_name+'_bert'), file_name+'_torchnn.pth', 2)
+    trc_add, brt_add = find_torch_and_bert_paths(file_name)
+    return DNASequenceClassifier(BertModel.from_pretrained(brt_add), trc_add, 2)
