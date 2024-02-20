@@ -84,7 +84,7 @@ python motif_finding.py -dmc_seq <dmc_seq_address> -ndmc_seq <ndmc_seq_address> 
 **Example Command:**
 
 ```
-python motif_finding.py -dmc_seq ./data/motif_sample_pos.fa -ndmc_seq ./data/motif_sample_neg.fa -mn ./models/trained_clf -ws 512 -kmer 6
+python motif_finding.py -dmc_seq ./data/motif_sample_pos.fa -ndmc_seq ./data/motif_sample_neg.fa -mn ./models/pretrained_models/TET/ -ws 512 -kmer 6
 ```
 
 
