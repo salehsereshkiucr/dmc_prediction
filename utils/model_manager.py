@@ -23,7 +23,8 @@ class DNASequenceClassifier(nn.Module):
             nn.Softmax()
         ).to(torch.float32)
         if fc_ad != None:
-            self.fc.load_state_dict(torch.load(fc_ad))
+            device = 'cuda' if torch.cuda.is_available() else 'cpu'
+            self.fc.load_state_dict(torch.load(fc_ad, map_location=torch.device(device)))
         self.include_meth = 'meth_window_size' in kwargs.keys()
     def forward(self, input_ids, attention_mask, methylations=None):
         #output_attentions=True
